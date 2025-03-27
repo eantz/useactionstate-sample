@@ -11,6 +11,8 @@ export const RegisterSchema = z.object({
   path: ['confirmPassword']
 })
 
+export type RegisterType = z.infer<typeof RegisterSchema>
+
 export const formInitialState = {
   username: "",
   email: "",

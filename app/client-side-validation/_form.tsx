@@ -3,20 +3,19 @@
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useActionState, useEffect, useTransition } from "react"
 import { SubmitHandler, useForm } from "react-hook-form"
-import { z } from "zod"
-import { RegisterSchema, formInitialState } from "./schema"
+import { RegisterSchema, RegisterType, formInitialState } from "./schema"
 import { registerUser } from "./actions"
 
 
 export function RegisterForm() {
-  const [formState, formAction, isFormPending] = useActionState<z.infer<typeof RegisterSchema>, FormData>(registerUser, formInitialState)
+  const [formState, formAction, isFormPending] = useActionState<RegisterType, FormData>(registerUser, formInitialState)
   const [isTransitionPending, startTransition] = useTransition();
 
-  const form = useForm<z.infer<typeof RegisterSchema>>({
+  const form = useForm<RegisterType>({
     resolver: zodResolver(RegisterSchema)
   })
 
-  const submitHandler: SubmitHandler<z.infer<typeof RegisterSchema>> = (data) => {
+  const submitHandler: SubmitHandler<RegisterType> = (data) => {
     const submissionData = new FormData()
     submissionData.set('username', data.username)
     submissionData.set('email', data.email)
@@ -31,7 +30,7 @@ export function RegisterForm() {
 
     if (formState.errors) {
       Object.keys(formState.errors).forEach((k) => {
-        const errkey = k as keyof z.infer<typeof RegisterSchema>
+        const errkey = k as keyof RegisterType
 
         if (formState.errors && errkey in formState.errors) {
           form.setError(
@@ -56,7 +55,7 @@ export function RegisterForm() {
     <>
       <form 
         className="w-[400px] flex flex-col gap-4 bg-slate-900 p-4 pb-8 mt-12 border-2 border-gray-400 rounded-md"
-        onSubmit={form.handleSubmit((data: z.infer<typeof RegisterSchema>) => {
+        onSubmit={form.handleSubmit((data: RegisterType) => {
           submitHandler(data)
         })}
       >

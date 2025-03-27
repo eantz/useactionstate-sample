@@ -1,16 +1,15 @@
 'use client'
 
 import { useForm } from "react-hook-form"
-import { formInitialState, RegisterSchema } from "./schema"
+import { formInitialState, RegisterSchema, RegisterType } from "./schema"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { z } from "zod"
 import { registerUser } from "./actions"
 import { useActionState, useEffect } from "react"
 
 export function RegisterForm() {
-  const [formState, formAction, isFormPending] = useActionState<z.infer<typeof RegisterSchema>, FormData>(registerUser, formInitialState)
+  const [formState, formAction, isFormPending] = useActionState<RegisterType, FormData>(registerUser, formInitialState)
 
-  const form = useForm<z.infer<typeof RegisterSchema>>({
+  const form = useForm<RegisterType>({
     resolver: zodResolver(RegisterSchema)
   })
 
@@ -21,7 +20,7 @@ export function RegisterForm() {
 
     if (formState.errors) {
       Object.keys(formState.errors).forEach((k) => {
-        const errkey = k as keyof z.infer<typeof RegisterSchema>
+        const errkey = k as keyof RegisterType
 
         if (formState.errors && errkey in formState.errors) {
           form.setError(

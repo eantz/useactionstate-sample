@@ -1,9 +1,8 @@
 'use server';
 
-import { z } from "zod"
-import { RegisterSchema } from "./schema"
+import { RegisterSchema, RegisterType } from "./schema"
 
-export async function registerUser(state: z.infer<typeof RegisterSchema>, formData: FormData): Promise<z.infer<typeof RegisterSchema>> {
+export async function registerUser(state: RegisterType, formData: FormData): Promise<RegisterType> {
   const username = String(formData.get('username'))
   const email = String(formData.get('email'))
   
