@@ -1,33 +1,23 @@
 'use client'
 
+import { useForm } from "react-hook-form"
+import { formInitialState, RegisterSchema } from "./schema"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { useActionState, useEffect, useTransition } from "react"
-import { SubmitHandler, useForm } from "react-hook-form"
 import { z } from "zod"
-import { RegisterSchema, formInitialState } from "./schema"
 import { registerUser } from "./actions"
-
+import { useActionState, useEffect } from "react"
 
 export function RegisterForm() {
   const [formState, formAction, isFormPending] = useActionState<z.infer<typeof RegisterSchema>, FormData>(registerUser, formInitialState)
-  const [isTransitionPending, startTransition] = useTransition();
 
   const form = useForm<z.infer<typeof RegisterSchema>>({
     resolver: zodResolver(RegisterSchema)
   })
 
-  const submitHandler: SubmitHandler<z.infer<typeof RegisterSchema>> = (data) => {
-    const submissionData = new FormData()
-    submissionData.set('username', data.username)
-    submissionData.set('email', data.email)
-
-    startTransition(async() => {
-      formAction(submissionData);
-    })
-  }
-
   useEffect(() => {
-    console.log(formState.errors)
+    form.setValue('username', formState.username)
+    form.setValue('email', formState.email)
+    form.clearErrors()
 
     if (formState.errors) {
       Object.keys(formState.errors).forEach((k) => {
@@ -56,9 +46,7 @@ export function RegisterForm() {
     <>
       <form 
         className="w-[400px] flex flex-col gap-4 bg-slate-900 p-4 pb-8 mt-12 border-2 border-gray-400 rounded-md"
-        onSubmit={form.handleSubmit((data: z.infer<typeof RegisterSchema>) => {
-          submitHandler(data)
-        })}
+        action={formAction}
       >
         <h2 className="text-center font-bold text-xl">Register User</h2>
 
@@ -74,7 +62,8 @@ export function RegisterForm() {
             type="text" 
             id="username" 
             className="border rounded-sm bg-slate-200 p-1 text-slate-700 disabled:bg-slate-400"
-            {...form.register('username')} disabled={isFormPending || isTransitionPending} 
+            disabled={isFormPending}
+            {...form.register('username')}
           />
           <span className="text-red-600">
             {form.formState.errors.username?.message}
@@ -87,7 +76,9 @@ export function RegisterForm() {
             type="email" 
             id="email" 
             className="border rounded-sm bg-slate-200 p-1 text-slate-700 disabled:bg-slate-400"
-            {...form.register('email')} disabled={isFormPending || isTransitionPending} />
+            disabled={isFormPending}
+            {...form.register('email')} 
+          />
           <span className="text-red-600">
             {form.formState.errors.email?.message}
           </span>
@@ -99,7 +90,8 @@ export function RegisterForm() {
             type="password" 
             id="password" 
             className="border rounded-sm bg-slate-200 p-1 text-slate-700 disabled:bg-slate-400"
-            {...form.register('password')} disabled={isFormPending || isTransitionPending} 
+            disabled={isFormPending}
+            {...form.register('password')}
           />
           <span className="text-red-600">
             {form.formState.errors.password?.message}
@@ -112,7 +104,8 @@ export function RegisterForm() {
             type="password" 
             id="confirmPassword" 
             className="border rounded-sm bg-slate-200 p-1 text-slate-700 disabled:bg-slate-400"
-            {...form.register('confirmPassword')} disabled={isFormPending || isTransitionPending} 
+            disabled={isFormPending}
+            {...form.register('confirmPassword')}
           />
           <span className="text-red-600">
             {form.formState.errors.confirmPassword?.message}
