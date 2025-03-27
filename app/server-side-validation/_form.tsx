@@ -5,6 +5,7 @@ import { formInitialState, RegisterSchema, RegisterType } from "./schema"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { registerUser } from "./actions"
 import { useActionState, useEffect } from "react"
+import { Github } from "lucide-react"
 
 export function RegisterForm() {
   const [formState, formAction, isFormPending] = useActionState<RegisterType, FormData>(registerUser, formInitialState)
@@ -117,6 +118,13 @@ export function RegisterForm() {
         >
           Submit
         </button>
+
+        <a href="https://github.com/eantz/useactionstate-sample/app/server-side-validation" 
+          className="text-gray-400 hover:text-gray-500 text-center mt-6" 
+          target="_blank"
+        >
+          <Github className="h-6 w-6 inline border rounded-xl p-1 bg-black" /> Source Code
+        </a>
       </form>
     </>
   )

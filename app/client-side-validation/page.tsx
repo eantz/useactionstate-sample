@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { RegisterForm } from "./_form";
 
 export default async function ClientSideValidation() {
@@ -9,6 +10,16 @@ export default async function ClientSideValidation() {
       </h1>
 
       <RegisterForm />
+
+      <div className="flex flex-col items-center mt-12">
+        <hr className="border-2 border-gray-600 w-[300px] mb-4" />
+
+        <div>
+          <Link href="/server-side-validation" className="hover:underline">
+            Check out <span className="text-purple-600">Server Side</span> Validation
+          </Link>
+        </div>
+      </div>
 
     </div>
   )

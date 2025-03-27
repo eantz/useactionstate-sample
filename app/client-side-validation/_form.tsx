@@ -5,6 +5,7 @@ import { useActionState, useEffect, useTransition } from "react"
 import { SubmitHandler, useForm } from "react-hook-form"
 import { RegisterSchema, RegisterType, formInitialState } from "./schema"
 import { registerUser } from "./actions"
+import { Github } from "lucide-react"
 
 
 export function RegisterForm() {
@@ -124,6 +125,13 @@ export function RegisterForm() {
         >
           Submit
         </button>
+
+        <a href="https://github.com/eantz/useactionstate-sample/app/client-side-validation" 
+          className="text-gray-400 hover:text-gray-500 text-center mt-6" 
+          target="_blank"
+        >
+          <Github className="h-6 w-6 inline border rounded-xl p-1 bg-black" /> Source Code
+        </a>
       </form>
     </>
   )

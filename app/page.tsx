@@ -1,103 +1,53 @@
+import { Github } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link"
+
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <div className="flex flex-col items-center">
+      <h1 className="text-2xl mt-12">
+        <code className="text-red-400">useActionState</code> with <strong>React Hook Form</strong> and <strong>Zod</strong> Demo
+      </h1>
+      <div className="w-[400px] bg-slate-900 p-4 pb-8 mt-12 border-2 border-gray-400 rounded-md">
+        <p className="my-4">
+          This is a working demo on how to use <code className="text-red-400">useActionState</code>, <strong>React Hook Form</strong>, and <strong>Zod</strong> together. <br />
+        </p>
+        
+        <p className="my-4">
+          I write an article in <a href="" className="text-orange-500 hover:text-orange-600" target="_blank">
+            <Image height="16" width="16" src="https://cdn.simpleicons.org/medium/f66602" alt="medium icon" 
+              className="inline"
+            />&nbsp;Medium
+          </a> about this.
+        </p>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+        <p className="my-4">
+          You can read the full source code in this&nbsp;
+          <a href="https://github.com/eantz/useactionstate-sample" className="text-gray-400 hover:text-gray-500" target="_blank">
+            <Github className="h-6 w-6 inline border rounded-xl p-1 bg-black" /> repo
+          </a>.
+        </p>
+        
+        <p className="mt-4 mb-2">
+          In short, you can choose between : 
+        </p>
+        <ul className="list-disc ml-4">
+          <li>
+            <Link href="/client-side-validation" className="hover:underline">
+              <span className="text-amber-500">Client Side</span> Validation
+            </Link>
+          </li>
+          
+          <li>
+            <Link href="/server-side-validation" className="hover:underline">
+              <span className="text-purple-600">Server Side</span> Validation
+            </Link>
+          </li>
+        </ul>
+        
+      </div>
     </div>
+    
   );
 }
