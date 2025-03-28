@@ -27,7 +27,6 @@ export function RegisterForm() {
   }
 
   useEffect(() => {
-    console.log(formState.errors)
 
     if (formState.errors) {
       Object.keys(formState.errors).forEach((k) => {
